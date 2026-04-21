@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Major Cities in the US</title>
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" />
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+    <script>
+        const map = new maplibregl.Map({
+            container: 'map',
+            style: 'https://demotiles.maplibre.org/style.json',
+            center: [-98.5795, 39.8283], // Center of US
+            zoom: 4
+        });
+
+        const cities = [
+            { name: 'New York', lng: -74.0060, lat: 40.7128 },
+            { name: 'Los Angeles', lng: -118.2437, lat: 34.0522 },
+            { name: 'Chicago', lng: -87.6298, lat: 41.8781 },
+            { name: 'Houston', lng: -95.3698, lat: 29.7604 },
+            { name: 'Phoenix', lng: -112.0740, lat: 33.4484 },
+            { name: 'Philadelphia', lng: -75.1652, lat: 39.9526 },
+            { name: 'San Antonio', lng: -98.4936, lat: 29.4241 },
+            { name: 'San Diego', lng: -117.1611, lat: 32.7157 },
+            { name: 'Dallas', lng: -96.7970, lat: 32.7767 },
+            { name: 'San Jose', lng: -121.8863, lat: 37.3382 }
+        ];
+
+        cities.forEach(city => {
+            new maplibregl.Marker()
+                .setLngLat([city.lng, city.lat])
+                .setPopup(new maplibregl.Popup().setHTML(`<h3>${city.name}</h3>`))
+                .addTo(map);
+        });
+    </script>
+</body>
+</html>
